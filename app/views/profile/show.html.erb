@@ -1,4 +1,24 @@
-<h1><%= @user.username %>'s Profile</h1>
-<% @user.tweets.each do |tweet| %>
+<h3><%= @user.username %>'s Profile</h3>
+
+
+<% if current_user.id != @user.id %>
+  <% if current_user.friends.include?(@user) %>
+  <%= link_to "Go Away", relationship_path(current_user.relationships.find_by_friends_id(@user)), method: :delete, class: "btn btn-success" %>
+  <% else %>
+<%= link_to "Follow", relationships_path(:friends_id => @user), method: :post, class: "btn btn-warning" %>
+<% end %>
+<% end %>
+
+<% @user.tweets.each do |tweet|%>
 <%= tweet.message %>
+<% end %>
+
+<h4>following these folks(<%= @user.friends.count %>)</h4>
+<% @user.friends.each do |friend| %>
+	<%= link_to friend.name, profile_path(friend) %> <br>
+<% end %>
+
+<h1>My Raving Fans</h1>
+<% @user.sheep.each do |sheep| %>
+<%= sheep.name %>
 <% end %>

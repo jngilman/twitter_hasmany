@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'profile/feed'
 
+  resources :relationships
   resources :tweets
   devise_for :users
 

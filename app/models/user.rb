@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
 	has_many :friends, through: :relationships
 
 
-
+	has_many :inverted_relationships, class_name: "Relationship", foreign_key: "friends_id"
+	has_many :sheep, through: :inverted_relationships, source: :user
 
 
 

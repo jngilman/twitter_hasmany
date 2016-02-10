@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if user_signed_in? %>
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<%= link_to "All Tweets", tweets_path, class: "navbar-brand" %>
+				<%= link_to "My Feed", root_path, class: "navbar-brand" %>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+				<ul class="nav navbar-nav navbar-left">
+					<!-- Future links -->
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><%= link_to "#{current_user.username}'s Profile", edit_user_registration_path %></li>
+					<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+<% else %>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<%= link_to "All Tweets", tweets_path, class: "navbar-brand" %>
+				<%= link_to "My Feed", root_path, class: "navbar-brand" %>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+				<ul class="nav navbar-nav navbar-right">
+					<li><%= link_to "Sign Up", new_user_registration_path %></li>
+					<li><%= link_to "Forgot Password", new_user_password_path %></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+<% end %>
+
+
+
+
+
+
+
+<%= yield %>
+
+</body>
+</html>
